@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DevBlog.Core.Entities
+namespace DevBlog.Core.Entities.Blog
 {
     [Table("PostsInSeries")]
     [PrimaryKey(nameof(PostId), nameof(SeriesId))]
