@@ -1,0 +1,6 @@
+@DevBlog.Api_HostAddress = http://localhost:5032
+
+GET {{DevBlog.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
