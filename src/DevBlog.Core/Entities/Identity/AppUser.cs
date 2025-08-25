@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevBlog.Core.Entities.Identity
@@ -6,10 +7,17 @@ namespace DevBlog.Core.Entities.Identity
     [Table("AppUsers")]
     public class AppUser : IdentityUser<Guid>
     {
+        [Required]
+        [MaxLength(100)]
         public required string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(100)]
         public required string LastName { get; set; }
         public decimal Balance { get; set; }
         public DateTime Dob { get; set; }
+
+        [MaxLength(500)]
         public string? Avatar { get; set; }
 
         public bool IsActive { get; set; }
