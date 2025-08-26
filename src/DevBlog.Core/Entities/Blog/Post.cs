@@ -45,6 +45,8 @@ namespace DevBlog.Core.Entities.Blog
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public bool IsPaid { get; set; }
+
+        [Precision(18, 2)]
         public decimal RoyaltyAmount { get; set; }
 
         [Column(TypeName = "int")]

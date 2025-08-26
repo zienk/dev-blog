@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,6 +15,8 @@ namespace DevBlog.Core.Entities.Identity
         [Required]
         [MaxLength(100)]
         public required string LastName { get; set; }
+
+        [Precision(18, 2)]
         public decimal Balance { get; set; }
         public DateTime Dob { get; set; }
 
