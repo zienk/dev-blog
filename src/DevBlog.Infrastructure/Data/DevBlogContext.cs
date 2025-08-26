@@ -52,7 +52,7 @@ namespace DevBlog.Infrastructure.Data
                     dateModifiedProp.SetValue(entityEntry.Entity, DateTime.UtcNow);
                 }
             }
-            return base.SaveChangesAsync(cancellationToken);
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess ,cancellationToken);
         }
 
     }

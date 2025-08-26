@@ -1,3 +1,4 @@
+using DevBlog.Api.Extensions;
 using DevBlog.Core.Entities.Identity;
 using DevBlog.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
@@ -58,5 +59,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Seeding Data
+app.MigrateDatabase();
 
 app.Run();
