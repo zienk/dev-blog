@@ -1,7 +1,7 @@
 ﻿using DevBlog.Core.SeedWorks;
 using DevBlog.Infrastructure.Data;
 
-namespace DevBlog.Infrastructure.Repositories
+namespace DevBlog.Infrastructure.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

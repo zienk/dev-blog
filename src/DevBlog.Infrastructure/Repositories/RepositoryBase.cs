@@ -8,10 +8,11 @@ namespace DevBlog.Infrastructure.Repositories
     public class RepositoryBase<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
         private readonly DbSet<TEntity> _dbSet;
-
+        protected readonly DevBlogContext _context;
         public RepositoryBase(DevBlogContext context)
         {
             _dbSet = context.Set<TEntity>();
+            _context = context;
         }
 
         public void Add(TEntity entity)
