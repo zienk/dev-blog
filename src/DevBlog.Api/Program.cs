@@ -1,5 +1,6 @@
 using DevBlog.Api.Extensions;
 using DevBlog.Core.Entities.Identity;
+using DevBlog.Core.Models.Content;
 using DevBlog.Core.SeedWorks;
 using DevBlog.Infrastructure.Data;
 using DevBlog.Infrastructure.Repositories;
@@ -60,6 +61,9 @@ foreach (var service in services)
         builder.Services.Add(new ServiceDescriptor(directInterfaces, service, ServiceLifetime.Scoped));
     }
 }
+
+// Auto Mapper
+builder.Services.AddAutoMapper(typeof(PostInListDto));
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
