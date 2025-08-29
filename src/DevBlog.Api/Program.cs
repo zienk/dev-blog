@@ -1,4 +1,5 @@
 using DevBlog.Api.Extensions;
+using DevBlog.Api.Filters;
 using DevBlog.Api.Services;
 using DevBlog.Core.ConfigOptions;
 using DevBlog.Core.Entities.Identity;
