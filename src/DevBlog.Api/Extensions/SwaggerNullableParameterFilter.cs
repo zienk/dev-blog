@@ -10,7 +10,7 @@ namespace DevBlog.Api.Extensions
         {
             if (!parameter.Schema.Nullable 
                 && context.ApiParameterDescription.Type.IsNullableType()
-                || !context.ApiParameterDescription.Type.IsValueType)) 
+                || !context.ApiParameterDescription.Type.IsValueType)
             {
                 parameter.Schema.Nullable = true;
             }

@@ -1,4 +1,6 @@
 using DevBlog.Api.Extensions;
+using DevBlog.Api.Services;
+using DevBlog.Core.ConfigOptions;
 using DevBlog.Core.Entities.Identity;
 using DevBlog.Core.Models.Content;
 using DevBlog.Core.SeedWorks;
@@ -66,6 +68,20 @@ foreach (var service in services)
 
 // Auto Mapper
 builder.Services.AddAutoMapper(typeof(PostInListDto));
+
+// AUTHENTICATION AND AUTHORIZATION
+// Register Configure JWT Token Settings read from appsettings.json
+builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));
+
+// Register SignInManager and UserManager for AuthController
+builder.Services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+
+// Register TokenService for AuthController
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+// Register RoleManager for seeding roles
+builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
