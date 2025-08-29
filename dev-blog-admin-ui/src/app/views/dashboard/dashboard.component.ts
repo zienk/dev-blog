@@ -1,5 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import {
+  AvatarModule,
+  ButtonGroupModule,
+  ButtonModule,
+  CardModule,
+  FormModule,
+  GridModule,
+  NavModule,
+  ProgressModule,
+  TableModule,
+  TabsModule,
+} from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
+import { ChartjsModule } from '@coreui/angular-chartjs';
+
+import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.component';
+import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 
@@ -18,6 +38,26 @@ interface IUser {
 }
 
 @Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    CardModule,
+    NavModule,
+    IconModule,
+    TabsModule,
+    GridModule,
+    ProgressModule,
+    ButtonModule,
+    FormModule,
+    ButtonGroupModule,
+    ChartjsModule,
+    AvatarModule,
+    TableModule,
+    WidgetsBrandComponent,
+    WidgetsDropdownComponent,
+  ],
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss']
 })
@@ -105,7 +145,7 @@ export class DashboardComponent implements OnInit {
       color: 'dark'
     }
   ];
-
+  public mainChart: IChartProps = { type: 'line' };
   public chart: Array<IChartProps> = [];
   public trafficRadioGroup = new UntypedFormGroup({
     trafficRadio: new UntypedFormControl('Month')
@@ -116,7 +156,7 @@ export class DashboardComponent implements OnInit {
   }
 
   initCharts(): void {
-
+    this.mainChart = this.chartsData.mainChart;
   }
 
   setTrafficPeriod(value: string): void {
