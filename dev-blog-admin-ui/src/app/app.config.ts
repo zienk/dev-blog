@@ -13,8 +13,12 @@ import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 
+import {ADMIN_API_BASE_URL} from './api/admin-api.service.generated'
+import { environment } from '../environments/environments';
+
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: ADMIN_API_BASE_URL, useValue: environment.API_URL},
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'
