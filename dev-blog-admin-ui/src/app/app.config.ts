@@ -21,7 +21,7 @@ import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { AlertService } from './shared/services/alert.service';
-
+import { TokenStorageService } from './shared/services/token-storage.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -51,5 +51,6 @@ export const appConfig: ApplicationConfig = {
     }),
     MessageService,
     AlertService,
+    TokenStorageService
   ]
 };
