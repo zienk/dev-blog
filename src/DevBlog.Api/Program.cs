@@ -16,8 +16,10 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Get the connection string from configuration (json)
-var configuration = builder.Configuration;
+var configuration = builder.Configuration; 
 var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+var DevCorsPolicy = "DevCorsPolicy";
 
 // Config DbContext and ASP.NET Core Identity
 builder.Services.AddDbContext<DevBlogContext>(options => options.UseSqlServer(connectionString));
@@ -86,6 +88,19 @@ builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
+
+// CORS 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(DevCorsPolicy, builder =>
+    {
+        builder.AllowAnyMethod()
+               .AllowAnyHeader()
+               .WithOrigins(configuration["AllowedOrigins"])
+               .AllowCredentials();
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -118,6 +133,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(DevCorsPolicy);
 
 app.UseAuthorization();
 
