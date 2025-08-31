@@ -1,5 +1,6 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient } from '@angular/common/http';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
@@ -14,11 +15,20 @@ import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 
 import {ADMIN_API_BASE_URL} from './api/admin-api.service.generated'
+import { AdminApiAuthApiClient, AdminApiPostApiClient } from './api/admin-api.service.generated';
 import { environment } from '../environments/environments';
+import { MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
+import { AlertService } from './shared/services/alert.service';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: ADMIN_API_BASE_URL, useValue: environment.API_URL},
+    provideHttpClient(),
+    AdminApiAuthApiClient,
+    AdminApiPostApiClient,
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'
@@ -33,6 +43,13 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura
+      }
+    }),
+    MessageService,
+    AlertService,
   ]
 };

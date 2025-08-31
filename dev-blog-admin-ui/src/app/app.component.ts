@@ -8,10 +8,15 @@ import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
 
+import { ToastModule } from 'primeng/toast';
+
 @Component({
     selector: 'app-root',
-    template: '<router-outlet />',
-    imports: [RouterOutlet]
+    template: `
+      <router-outlet />
+      <p-toast position="top-center" />
+    `,
+    imports: [RouterOutlet, ToastModule]
 })
 export class AppComponent implements OnInit {
   title = 'Dev Blog Admin UI';
