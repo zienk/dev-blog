@@ -8,6 +8,9 @@ export const navItems: INavData[] = [
     badge: {
       color: 'info',
       text: 'NEW'
+    },
+    attributes: {
+      "policyName": "Permissions.Dashboard.View"
     }
   },
   {
@@ -22,14 +25,23 @@ export const navItems: INavData[] = [
       {
         name: 'Post',
         url: '/content/posts',
+        attributes: {
+        "policyName": "Permissions.Posts.View"
+    }
       },
       {
         name: 'Series',
         url: '/content/series',
+        attributes: {
+          "policyName": "Permissions.Series.View"
+        }
       },
       {
         name: 'Author’s fee',
         url: '/content/royalty',
+        attributes: {
+          "policyName": "Permissions.Loyalty.View"
+        }
       },
     ]
   },
@@ -41,10 +53,16 @@ export const navItems: INavData[] = [
       {
         name: 'Roles',
         url: '/system/roles',
+        attributes: {
+          "policyName": "Permissions.Roles.View"
+        }
       },
       {
         name: 'User',
         url: '/system/users',
+        attributes: {
+          "policyName": "Permissions.Users.View"
+        }
       },
     ]
   },
