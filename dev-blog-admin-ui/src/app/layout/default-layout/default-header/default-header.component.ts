@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import {
   AvatarComponent,
@@ -23,6 +23,8 @@ import {
 } from '@coreui/angular';
 
 import { IconDirective } from '@coreui/icons-angular';
+import { TokenStorageService } from '../../../shared/services/token-storage.service';
+import { UrlConstants } from 'src/app/shared/constants/url.constants';
 
 @Component({
   selector: 'app-default-header',
@@ -45,8 +47,16 @@ export class DefaultHeaderComponent extends HeaderComponent {
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
 
-  constructor() {
+  constructor(
+    private tokenService: TokenStorageService,
+    private router: Router
+  ) {
     super();
+  }
+
+  logout() {
+    this.tokenService.signOut();
+    this.router.navigate([UrlConstants.LOGIN]);
   }
 
   sidebarId = input('sidebar1');

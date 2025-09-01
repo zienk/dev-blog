@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
 import {
@@ -22,14 +22,18 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 import { Router } from '@angular/router';
 import { UrlConstants } from 'src/app/shared/constants/url.constants';
 import { TokenStorageService } from '../../../shared/services/token-storage.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, ReactiveFormsModule]
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+  
   loginForm: FormGroup;
+  private ngUnsubscribe = new Subject<void>();
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -44,13 +48,21 @@ export class LoginComponent {
     })
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   login() {
+    this.loading = true;
     var request: LoginRequest = new LoginRequest({
       username: this.loginForm.controls['userName'].value,
       password: this.loginForm.get('password')?.value
     });
 
-    this.authApiClient.login(request).subscribe({
+    this.authApiClient.login(request)
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe({
       next: (res: AuthenticatedResult) => {
         //Save token and refresh token to localstorage
         this.tokenService.saveToken(res.token);
@@ -63,6 +75,7 @@ export class LoginComponent {
         // Handle error
         console.error('Login error:', error);
         this.alertService.showError('Login failed. Please try again.');
+        this.loading = false;
       },
 
     });
