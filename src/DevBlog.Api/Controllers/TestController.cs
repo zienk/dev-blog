@@ -11,7 +11,7 @@ namespace DevBlog.Api.Controllers
         [HttpGet]
         public IActionResult TestAuthen()
         {
-            return Ok("You are authenticated");
+            return Ok();
         }
     }
 }

@@ -447,7 +447,7 @@ export class AdminApiTokenApiClient {
      * @return OK
      */
     refresh(body?: TokenRequest | undefined): Observable<AuthenticatedResult> {
-        let url_ = this.baseUrl + "/api/Token/refresh";
+        let url_ = this.baseUrl + "/api/admin/token/refresh";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -502,7 +502,7 @@ export class AdminApiTokenApiClient {
      * @return OK
      */
     revoke(): Observable<void> {
-        let url_ = this.baseUrl + "/api/Token/revoke";
+        let url_ = this.baseUrl + "/api/admin/token/revoke";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -936,8 +936,8 @@ export enum PostStatus {
 }
 
 export class TokenRequest implements ITokenRequest {
-    accessToken?: string | undefined;
-    refreshToken?: string | undefined;
+    accessToken!: string | undefined;
+    refreshToken!: string | undefined;
 
     constructor(data?: ITokenRequest) {
         if (data) {
@@ -971,8 +971,8 @@ export class TokenRequest implements ITokenRequest {
 }
 
 export interface ITokenRequest {
-    accessToken?: string | undefined;
-    refreshToken?: string | undefined;
+    accessToken: string | undefined;
+    refreshToken: string | undefined;
 }
 
 export class SwaggerException extends Error {
