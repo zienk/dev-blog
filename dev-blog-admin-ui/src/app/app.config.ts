@@ -1,6 +1,6 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
@@ -29,6 +29,7 @@ import { GlobalHttpInterceptorService } from './shared/interceptors/error-handle
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(HttpClientModule),
     { provide: ADMIN_API_BASE_URL, useValue: environment.API_URL},
     {
       provide: HTTP_INTERCEPTORS,
@@ -40,7 +41,7 @@ export const appConfig: ApplicationConfig = {
       useClass: GlobalHttpInterceptorService,
       multi: true,
     },
-    provideHttpClient(),
+    
     AdminApiAuthApiClient,
     AdminApiPostApiClient,
     provideRouter(routes,

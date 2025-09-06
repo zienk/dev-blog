@@ -41,18 +41,12 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<Object>> {
     let authReq = req;
     const token = this.tokenService.getToken();
-    
-    console.log('Token Interceptor - URL:', req.url);
-    console.log('Token Interceptor - Token exists:', !!token);
-    
     if (token != null) {
       authReq = this.addTokenHeader(req, token);
-      console.log('Token Interceptor - Authorization header added:', authReq.headers.get('Authorization'));
     }
 
     return next.handle(authReq).pipe(
       catchError((error) => {
-        console.log('Token Interceptor - Request failed:', error.status, error.url);
         if (
           error instanceof HttpErrorResponse &&
           !authReq.url.includes('auth/login') &&
