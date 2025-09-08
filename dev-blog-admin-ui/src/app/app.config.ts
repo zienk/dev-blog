@@ -14,10 +14,10 @@ import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 
-import {ADMIN_API_BASE_URL, AdminApiTestApiClient, AdminApiTokenApiClient} from './api/admin-api.service.generated'
+import {ADMIN_API_BASE_URL, AdminApiRoleApiClient, AdminApiTestApiClient, AdminApiTokenApiClient} from './api/admin-api.service.generated'
 import { AdminApiAuthApiClient, AdminApiPostApiClient } from './api/admin-api.service.generated';
 import { environment } from '../environments/environments';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { AlertService } from './shared/services/alert.service';
@@ -26,6 +26,7 @@ import { AuthGuard } from './shared/auth.guard';
 
 import { TokenInterceptor } from './shared/interceptors/token.interceptors';
 import { GlobalHttpInterceptorService } from './shared/interceptors/error-handler.interceptor';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -69,6 +70,9 @@ export const appConfig: ApplicationConfig = {
     TokenStorageService,
     AuthGuard,
     AdminApiTestApiClient,
-    AdminApiTokenApiClient
+    AdminApiTokenApiClient,
+    AdminApiRoleApiClient,
+    DialogService,
+    ConfirmationService
   ]
 };
