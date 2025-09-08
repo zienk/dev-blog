@@ -1,12 +1,29 @@
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { AdminApiRoleApiClient, PermissionDto, RoleClaimsDto } from '../../../api/admin-api.service.generated';
+import { PanelModule } from 'primeng/panel';
+import { CheckboxModule } from 'primeng/checkbox';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     templateUrl: 'permission-grant.component.html',
+    standalone: true,
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        PanelModule,
+        CheckboxModule,
+        BlockUIModule,
+        ProgressSpinnerModule,
+        ButtonModule
+    ]
 })
 export class PermissionGrantComponent implements OnInit, OnDestroy {
     private ngUnsubscribe = new Subject<void>();
@@ -52,7 +69,7 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe({
                 next: (response: PermissionDto) => {
-                    this.permissions = response.roleClaims;
+                    this.permissions = response.roleClaims ?? [];
                     this.buildForm();
                     this.toggleBlockUI(false);
                 },

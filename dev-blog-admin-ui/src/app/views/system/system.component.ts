@@ -16,6 +16,7 @@ import { SharedModule } from 'primeng/api';
 import { RolesDetailComponent } from './roles/roles-detail.component';
 import { DevBlogSharedModule } from '../../shared/modules/devblog-shared.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { PermissionGrantComponent } from './roles/permission-grant.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
   declarations: [
     UserComponent,
     RoleComponent,
-    RolesDetailComponent
+    RolesDetailComponent,
+    PermissionGrantComponent
   ]
 })
 export class SystemModule {
