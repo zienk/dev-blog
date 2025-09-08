@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+    import { CommonModule } from '@angular/common';
 import {
     Validators,
     FormControl,
@@ -53,7 +53,10 @@ export class RolesDetailComponent implements OnInit, OnDestroy {
         private roleService: AdminApiRoleApiClient,
         private utilService: UtilityService,
         private fb: FormBuilder
-    ) { }
+    ) { 
+        // Khởi tạo form ngay trong constructor để tránh lỗi template
+        this.buildForm();
+    }
 
     ngOnDestroy(): void {
         if (this.ref) {
@@ -64,7 +67,6 @@ export class RolesDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.buildForm();
         if (this.utilService.isEmpty(this.config.data?.id) == false) {
             this.loadDetail(this.config.data.id);
             this.saveBtnName = 'Cập nhật';
@@ -129,20 +131,29 @@ export class RolesDetailComponent implements OnInit, OnDestroy {
     }
 
     buildForm() {
-        this.form = this.fb.group({
-            name: new FormControl(
-                this.selectedEntity.name || null,
-                Validators.compose([
-                    Validators.required,
-                    Validators.maxLength(255),
-                    Validators.minLength(3),
-                ])
-            ),
-            displayName: new FormControl(
-                this.selectedEntity.displayName || null,
-                Validators.required
-            ),
-        });
+        if (!this.form) {
+            // Tạo form lần đầu
+            this.form = this.fb.group({
+                name: new FormControl(
+                    this.selectedEntity?.name || null,
+                    Validators.compose([
+                        Validators.required,
+                        Validators.maxLength(255),
+                        Validators.minLength(3),
+                    ])
+                ),
+                displayName: new FormControl(
+                    this.selectedEntity?.displayName || null,
+                    Validators.required
+                ),
+            });
+        } else {
+            // Cập nhật giá trị form
+            this.form.patchValue({
+                name: this.selectedEntity?.name || null,
+                displayName: this.selectedEntity?.displayName || null
+            });
+        }
     }
 
     private toggleBlockUI(enabled: boolean) {

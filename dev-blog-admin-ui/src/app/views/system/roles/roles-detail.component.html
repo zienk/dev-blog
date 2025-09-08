@@ -1,4 +1,5 @@
 <form
+  *ngIf="form"
   class="p-fluid"
   [formGroup]="form"
   (ngSubmit)="saveChange()"
@@ -48,7 +49,7 @@
         type="submit"
         label="{{ saveBtnName }}"
         class="p-button-rounded"
-        [disabled]="!form.valid || btnDisabled"
+        [disabled]="!form?.valid || btnDisabled"
       ></button>
     </ng-template>
 
