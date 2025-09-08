@@ -13,6 +13,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from 'primeng/api';
+import { RolesDetailComponent } from './roles/roles-detail.component';
+import { DevBlogSharedModule } from '../../shared/modules/devblog-shared.module';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   imports: [
@@ -28,11 +31,14 @@ import { SharedModule } from 'primeng/api';
     CheckboxModule,
     ButtonModule,
     InputTextModule,
-    SharedModule
+    SharedModule,
+    DevBlogSharedModule,
+    KeyFilterModule
   ],
   declarations: [
     UserComponent,
-    RoleComponent
+    RoleComponent,
+    RolesDetailComponent
   ]
 })
 export class SystemModule {

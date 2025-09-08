@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { AdminApiRoleApiClient, RoleDto, RoleDtoPagedResult } from '../../../api/admin-api.service.generated';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogComponent } from 'primeng/dynamicdialog';
 import { AlertService } from '../../../shared/services/alert.service';
 import { ConfirmationService } from 'primeng/api';
 import { CommonModule, DecimalPipe } from '@angular/common';
@@ -14,6 +14,8 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { RolesDetailComponent } from './roles-detail.component';
+import { MessageConstants } from '../../../shared/constants/messages.constant';
 
 @Component({
   selector: 'app-role',
@@ -98,6 +100,24 @@ export class RoleComponent implements OnInit, OnDestroy {
   }
   showPermissionModal(id: string, name: string) {}
   showEditModal() {}
-  showAddModal() {}
+  showAddModal() {
+    const ref = this.dialogService.open(RolesDetailComponent, {
+      header: 'Thêm mới quyền',
+      width: '70%',
+    });
+
+    const dialogRef = this.dialogService.dialogComponentRefMap.get(ref);
+    const dynamicComponent = dialogRef?.instance as DynamicDialogComponent;
+    const ariaLabelledBy = dynamicComponent.getAriaLabelledBy();
+    dynamicComponent.getAriaLabelledBy = () => ariaLabelledBy;
+
+    ref.onClose.subscribe((data: RoleDto) => {
+      if (data) {
+        this.alertService.showSuccess(MessageConstants.CREATED_OK_MSG);
+        this.selectedItems = [];
+        this.loadData();
+      }
+    });
+  }
   deleteItems(){}
 }

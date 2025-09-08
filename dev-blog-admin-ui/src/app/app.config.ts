@@ -27,6 +27,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptor } from './shared/interceptors/token.interceptors';
 import { GlobalHttpInterceptorService } from './shared/interceptors/error-handler.interceptor';
 import { DialogService } from 'primeng/dynamicdialog';
+import { UtilityService } from './shared/services/utility.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -73,6 +74,7 @@ export const appConfig: ApplicationConfig = {
     AdminApiTokenApiClient,
     AdminApiRoleApiClient,
     DialogService,
-    ConfirmationService
+    ConfirmationService,
+    UtilityService
   ]
 };
