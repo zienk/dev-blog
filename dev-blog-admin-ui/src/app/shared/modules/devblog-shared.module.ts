@@ -3,8 +3,7 @@ import { NgModule } from "@angular/core";
 import { ValidationMessageComponent } from "../../shared/modules/validation-message/validation-message.component";
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [ValidationMessageComponent],
+    imports: [CommonModule, ValidationMessageComponent],
     exports: [ValidationMessageComponent]
 })
 

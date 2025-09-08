@@ -1,18 +1,37 @@
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
     Validators,
     FormControl,
     FormGroup,
     FormBuilder,
+    ReactiveFormsModule,
 } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { AdminApiRoleApiClient, RoleDto } from '../../../api/admin-api.service.generated';
 import { UtilityService } from '../../../shared/services/utility.service';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { ValidationMessageComponent } from '../../../shared/modules/validation-message/validation-message.component';
 
 @Component({
     selector: 'app-roles-detail',
     templateUrl: 'roles-detail.component.html',
+    standalone: true,
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        CardModule,
+        InputTextModule,
+        ButtonModule,
+        ProgressSpinnerModule,
+        KeyFilterModule,
+        ValidationMessageComponent
+    ]
 })
 export class RolesDetailComponent implements OnInit, OnDestroy {
     private ngUnsubscribe = new Subject<void>();

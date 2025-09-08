@@ -1,25 +1,20 @@
 <form
-  class="form-horizontal form-label-left"
-  skipValidation
+  class="p-fluid"
   [formGroup]="form"
   (ngSubmit)="saveChange()"
 >
-  <p-panel
-    #pnlDetail
-    header="Thông tin"
-    [toggleable]="true"
-    [collapsed]="false"
-  >
+  <p-card header="Thông tin" styleClass="mb-4">
     <div class="formgrid grid">
       <div class="field col-12 md:col-6">
-        <label for="name">Tên hệ thống <span class="required">*</span></label>
+        <label for="name" class="font-medium">
+          Tên hệ thống <span class="text-red-500">*</span>
+        </label>
         <input
           id="name"
           type="text"
           pInputText
           [pKeyFilter]="noSpecial"
           formControlName="name"
-          [style]="{ width: '100%' }"
         />
         <app-validation-message
           [entityForm]="form"
@@ -27,17 +22,17 @@
           [validationMessages]="validationMessages"
         ></app-validation-message>
       </div>
+
       <div class="field col-12 md:col-6">
-        <label for="displayName"
-          >Tên hiển thị<span class="required">*</span></label
-        >
+        <label for="displayName" class="font-medium">
+          Tên hiển thị <span class="text-red-500">*</span>
+        </label>
         <input
           id="displayName"
           type="text"
           pInputText
           [pKeyFilter]="noSpecial"
           formControlName="displayName"
-          [style]="{ width: '100%' }"
         />
         <app-validation-message
           [entityForm]="form"
@@ -46,29 +41,22 @@
         ></app-validation-message>
       </div>
     </div>
+
     <ng-template pTemplate="footer">
       <button
         pButton
         type="submit"
-        class="btn btn-primary"
+        label="{{ saveBtnName }}"
+        class="p-button-rounded"
         [disabled]="!form.valid || btnDisabled"
-      >
-        {{ saveBtnName }}
-      </button>
+      ></button>
     </ng-template>
 
-    <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
-      <p-progressSpinner
-        [style]="{
-          width: '100px',
-          height: '100px',
-          position: 'absolute',
-          top: '25%',
-          left: '50%'
-        }"
-        strokeWidth="2"
-        animationDuration=".5s"
-      ></p-progressSpinner>
-    </p-blockUI>
-  </p-panel>
+    <p-progressSpinner
+      *ngIf="blockedPanelDetail"
+      styleClass="absolute top-1/3 left-1/2"
+      strokeWidth="2"
+      animationDuration=".5s"
+    ></p-progressSpinner>
+  </p-card>
 </form>
