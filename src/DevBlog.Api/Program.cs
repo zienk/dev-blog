@@ -1,3 +1,4 @@
+using DevBlog.Api.Authorization;
 using DevBlog.Api.Extensions;
 using DevBlog.Api.Filters;
 using DevBlog.Api.Services;
@@ -9,6 +10,7 @@ using DevBlog.Infrastructure.Data;
 using DevBlog.Infrastructure.Repositories;
 using DevBlog.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -23,6 +25,10 @@ var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
 var DevCorsPolicy = "DevCorsPolicy";
+
+// Add custom authorization handlers and policy provider
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 // Config DbContext and ASP.NET Core Identity
 builder.Services.AddDbContext<DevBlogContext>(options => options.UseSqlServer(connectionString));
