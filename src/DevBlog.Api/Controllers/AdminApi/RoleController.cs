@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DevBlog.Api.Filters;
 using DevBlog.Core.Entities.Identity;
 using DevBlog.Core.Models;
 using DevBlog.Core.Models.System;
@@ -24,6 +25,7 @@ namespace DevBlog.Api.Controllers.AdminApi
         }
 
         [HttpPost]
+        [ValidateModel]
         [Authorize(Permissions.Roles.View)]
         public async Task<IActionResult> CreateRole([FromBody] CreateUpdateRoleRequest request)
         {
@@ -37,6 +39,7 @@ namespace DevBlog.Api.Controllers.AdminApi
         }
 
         [HttpPut("{id}")]
+        [ValidateModel]
         [Authorize(Permissions.Roles.Edit)]
         public async Task<IActionResult> UpdateRole(Guid id, [FromBody] CreateUpdateRoleRequest request)
         {
@@ -52,6 +55,7 @@ namespace DevBlog.Api.Controllers.AdminApi
         }
 
         [HttpDelete]
+        [ValidateModel]
         [Authorize(Permissions.Roles.Delete)]
         public async Task<IActionResult> DeleteRoles([FromBody] Guid[] ids)
         {
@@ -65,6 +69,7 @@ namespace DevBlog.Api.Controllers.AdminApi
         }
 
         [HttpGet("{id}")]
+        [ValidateModel]
         [Authorize(Permissions.Roles.View)]
         public async Task<ActionResult> GetRoleById(Guid id)
         {
@@ -76,6 +81,7 @@ namespace DevBlog.Api.Controllers.AdminApi
         }
 
         [HttpGet]
+        [ValidateModel]
         [Route("paging")]
         [Authorize(Permissions.Roles.View)]
         public async Task<ActionResult<PagedResult<RoleDto>>> GetRolesAllPaging(string? keyword, int pageIndex = 1, int pageSize = 10)
@@ -103,6 +109,7 @@ namespace DevBlog.Api.Controllers.AdminApi
         }
 
         [HttpGet("all")]
+        [ValidateModel]
         [Authorize(Permissions.Roles.View)]
         public async Task<ActionResult> GetAllRoles()
         {
