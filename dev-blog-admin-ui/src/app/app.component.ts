@@ -3,20 +3,25 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { delay, filter, map, tap } from 'rxjs/operators';
-
 import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
-
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
     selector: 'app-root',
     template: `
+      <p-confirmDialog
+      header="Xác nhận"
+      acceptLabel="Có"
+      rejectLabel="Không"
+      icon="pi pi-exclamation-triangle">
+      </p-confirmDialog>
       <router-outlet />
       <p-toast position="top-center" />
     `,
-    imports: [RouterOutlet, ToastModule]
+    imports: [RouterOutlet, ToastModule, ConfirmDialogModule]
 })
 export class AppComponent implements OnInit {
   title = 'Dev Blog Admin UI';

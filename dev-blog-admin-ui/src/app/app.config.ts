@@ -9,11 +9,9 @@ import {
   withRouterConfig,
   withViewTransitions
 } from '@angular/router';
-
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
-
 import {ADMIN_API_BASE_URL, AdminApiRoleApiClient, AdminApiTestApiClient, AdminApiTokenApiClient} from './api/admin-api.service.generated'
 import { AdminApiAuthApiClient, AdminApiPostApiClient } from './api/admin-api.service.generated';
 import { environment } from '../environments/environments';
@@ -23,10 +21,9 @@ import Aura from '@primeuix/themes/aura';
 import { AlertService } from './shared/services/alert.service';
 import { TokenStorageService } from './shared/services/token-storage.service';
 import { AuthGuard } from './shared/auth.guard';
-
 import { TokenInterceptor } from './shared/interceptors/token.interceptors';
 import { GlobalHttpInterceptorService } from './shared/interceptors/error-handler.interceptor';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { UtilityService } from './shared/services/utility.service';
 
 export const appConfig: ApplicationConfig = {
@@ -75,6 +72,7 @@ export const appConfig: ApplicationConfig = {
     AdminApiRoleApiClient,
     DialogService,
     ConfirmationService,
-    UtilityService
+    UtilityService,
+    DynamicDialogModule
   ]
 };

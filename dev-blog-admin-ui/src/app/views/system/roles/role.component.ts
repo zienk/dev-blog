@@ -143,5 +143,40 @@ export class RoleComponent implements OnInit, OnDestroy {
       }
     });
   }
-  deleteItems(){}
+  deleteItems(){
+    if (this.selectedItems.length == 0) {
+        this.alertService.showError(
+            MessageConstants.NOT_CHOOSE_ANY_RECORD
+        );
+        return;
+    }
+    var ids: string[] = [];
+    this.selectedItems.forEach((element) => {
+        ids.push(element.id!);
+    });
+    this.confirmationService.confirm({
+        message: MessageConstants.CONFIRM_DELETE_MSG,
+        accept: () => {
+            this.deleteItemsConfirm(ids);
+        },
+    });
+}
+
+deleteItemsConfirm(ids: any[]) {
+    this.toggleBlockUI(true);
+
+    this.roleService.deleteRoles(ids).subscribe({
+        next: () => {
+            this.alertService.showSuccess(
+                MessageConstants.DELETED_OK_MSG
+            );
+            this.loadData();
+            this.selectedItems = [];
+            this.toggleBlockUI(false);
+        },
+        error: () => {
+            this.toggleBlockUI(false);
+        },
+    });
+  }
 }
