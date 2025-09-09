@@ -19,8 +19,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ValidationMessageComponent } from '../../../shared/modules/validation-message/validation-message.component';
 
 @Component({
-    selector: 'app-roles-detail',
-    templateUrl: 'roles-detail.component.html',
+    selector: 'app-role-detail',
+    templateUrl: 'role-detail.component.html',
     standalone: true,
     imports: [
         CommonModule,
@@ -33,7 +33,7 @@ import { ValidationMessageComponent } from '../../../shared/modules/validation-m
         ValidationMessageComponent
     ]
 })
-export class RolesDetailComponent implements OnInit, OnDestroy {
+export class RoleDetailComponent implements OnInit, OnDestroy {
     private ngUnsubscribe = new Subject<void>();
 
     // Default

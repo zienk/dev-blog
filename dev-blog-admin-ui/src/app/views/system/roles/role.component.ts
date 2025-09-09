@@ -14,7 +14,7 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { RolesDetailComponent } from './roles-detail.component';
+import { RoleDetailComponent } from './role-detail.component';
 import { MessageConstants } from '../../../shared/constants/messages.constant';
 import { PermissionGrantComponent } from './permission-grant.component';
 
@@ -33,7 +33,7 @@ import { PermissionGrantComponent } from './permission-grant.component';
     ButtonModule,
     InputTextModule,
     DecimalPipe,
-    RolesDetailComponent,
+    RoleDetailComponent,
     PermissionGrantComponent
   ]
 })
@@ -129,7 +129,7 @@ export class RoleComponent implements OnInit, OnDestroy {
       return;
     }
     var id = this.selectedItems[0].id;
-    const ref = this.dialogService.open(RolesDetailComponent, {
+    const ref = this.dialogService.open(RoleDetailComponent, {
       data: {
         id: id,
       },
@@ -149,7 +149,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     });
   }
   showAddModal() {
-    const ref = this.dialogService.open(RolesDetailComponent, {
+    const ref = this.dialogService.open(RoleDetailComponent, {
       header: 'Thêm mới quyền',
       width: '70%',
     });
