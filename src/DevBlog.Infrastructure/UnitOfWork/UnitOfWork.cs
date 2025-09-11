@@ -8,15 +8,18 @@ namespace DevBlog.Infrastructure.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DevBlogContext _context;
-
-        public IPostRepository Posts { get; private set; }
+        private readonly DevBlogContext _context;  
 
         public UnitOfWork(DevBlogContext context, IMapper mapper)
         {
             _context = context;
             Posts = new PostRepository(_context, mapper);
+            PostCategories = new PostCategoryRepository(_context, mapper);
         }
+
+        public IPostRepository Posts { get; private set; }
+
+        public IPostCategoryRepository PostCategories { get; private set; }
 
         public async Task<int> CompleteAsync()
         {
