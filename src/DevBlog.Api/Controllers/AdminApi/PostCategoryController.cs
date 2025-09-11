@@ -25,9 +25,9 @@ namespace DevBlog.Api.Controllers.AdminApi
 
         public async Task<IActionResult> CreatePostCategory([FromBody] CreateUpdatePostCategoryRequest request)
         {
-            var post = _mapper.Map<CreateUpdatePostCategoryRequest, PostCategory>(request);
+            var category = _mapper.Map<CreateUpdatePostCategoryRequest, PostCategory>(request);
 
-            _unitOfWork.PostCategories.Add(post);
+            _unitOfWork.PostCategories.Add(category);
 
             var result = await _unitOfWork.CompleteAsync();
             return result > 0 ? Ok() : BadRequest();
@@ -37,12 +37,12 @@ namespace DevBlog.Api.Controllers.AdminApi
         [Authorize(PostCategories.Edit)]
         public async Task<IActionResult> UpdatePostCategory(Guid id, [FromBody] CreateUpdatePostCategoryRequest request)
         {
-            var post = await _unitOfWork.PostCategories.GetByIdAsync(id);
-            if (post == null)
+            var category = await _unitOfWork.PostCategories.GetByIdAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            _mapper.Map(request, post);
+            _mapper.Map(request, category);
 
             await _unitOfWork.CompleteAsync();
             return Ok();
@@ -54,12 +54,12 @@ namespace DevBlog.Api.Controllers.AdminApi
         {
             foreach (var id in ids)
             {
-                var post = await _unitOfWork.Posts.GetByIdAsync(id);
-                if (post == null)
+                var category = await _unitOfWork.PostCategories.GetByIdAsync(id);
+                if (category == null)
                 {
                     return NotFound();
                 }
-                _unitOfWork.Posts.Remove(post);
+                _unitOfWork.PostCategories.Remove(category);
             }
             var result = await _unitOfWork.CompleteAsync();
             return result > 0 ? Ok() : BadRequest();
