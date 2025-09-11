@@ -37,7 +37,6 @@ import { ValidationMessageComponent } from '../../../shared/modules/validation-m
     ProgressSpinnerModule,
     ButtonModule,
     ValidationMessageComponent,
-    DatePipe,
     FileUploadModule
   ],
   providers: [DatePipe]

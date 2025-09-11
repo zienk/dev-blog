@@ -32,9 +32,7 @@ import { PermissionGrantComponent } from './permission-grant.component';
     ProgressSpinnerModule,
     ButtonModule,
     InputTextModule,
-    DecimalPipe,
-    RoleDetailComponent,
-    PermissionGrantComponent
+    DecimalPipe
   ]
 })
 export class RoleComponent implements OnInit, OnDestroy {

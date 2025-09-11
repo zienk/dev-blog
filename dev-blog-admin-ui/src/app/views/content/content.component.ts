@@ -11,12 +11,22 @@ import {
   GridModule,
   NavModule,
   ProgressModule,
-  TableModule,
   TabsModule
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { ContentRoutingModule } from './routes';
+import { PostCategoryComponent } from './post-categories/post-category.component';
+import { PostCategoryDetailComponent } from './post-categories/post-category-detail.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { PanelModule } from 'primeng/panel';
+import { BlockUIModule } from 'primeng/blockui';
+import { PaginatorModule } from 'primeng/paginator';
+import { BadgeModule } from 'primeng/badge';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TableModule } from 'primeng/table';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { DevBlogSharedModule } from '../../shared/modules/devblog-shared.module';
 
 @NgModule({
   imports: [
@@ -35,10 +45,20 @@ import { ContentRoutingModule } from './routes';
     ButtonGroupModule,
     ChartjsModule,
     AvatarModule,
-    TableModule
-    
+    TableModule,
+    ProgressSpinnerModule,
+    PanelModule,
+    BlockUIModule,
+    PaginatorModule,
+    BadgeModule,
+    CheckboxModule,
+    KeyFilterModule,
+    DevBlogSharedModule
   ],
-  declarations: []
+  declarations: [
+    PostCategoryComponent,
+    PostCategoryDetailComponent
+  ]
 })
 export class ContentModule {
 }

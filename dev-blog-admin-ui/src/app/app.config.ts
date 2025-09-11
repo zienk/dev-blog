@@ -12,7 +12,7 @@ import {
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
-import {ADMIN_API_BASE_URL, AdminApiRoleApiClient, AdminApiTestApiClient, AdminApiTokenApiClient, AdminApiUserApiClient} from './api/admin-api.service.generated'
+import {ADMIN_API_BASE_URL, AdminApiPostCategoryApiClient, AdminApiRoleApiClient, AdminApiTestApiClient, AdminApiTokenApiClient, AdminApiUserApiClient} from './api/admin-api.service.generated'
 import { AdminApiAuthApiClient, AdminApiPostApiClient } from './api/admin-api.service.generated';
 import { environment } from '../environments/environments';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -74,6 +74,7 @@ export const appConfig: ApplicationConfig = {
     ConfirmationService,
     UtilityService,
     DynamicDialogModule,
-    AdminApiUserApiClient
+    AdminApiUserApiClient,
+    AdminApiPostCategoryApiClient
   ]
 };
